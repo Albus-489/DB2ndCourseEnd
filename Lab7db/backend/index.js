@@ -205,17 +205,63 @@ app.post('/investments', (req, res) => {
 })
 
 // * Оновлення/редагування даних (put) *
-// ? Редагування клієнта по id
 app.put('/client/:id', (req, res) =>{
     
     let cID = req.params.id;
     let cName = req.body.cName;
     let cType = req.body.cType;
     let cAddress = req.body.cAddress;
+    let cPhone = req.body.cPhone;
+
+    let qr = `UPDATE clients SET cName = '${cName}', cType = '${cType}', cAddress = '${cAddress}', cPhone = '${cPhone}'
+                WHERE cID = '${cID}'`;
+
+    db.query(qr, (err, result) => {
+        if(err){
+            console.log(err, 'POST ------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно оновлено',
+                results:result
+            });
+        }
+    });
+});
+
+app.put('/secur/:id', (req, res) =>{
+    
+    let SecuritiesID = req.params.id;
+    let MinimumAmount = req.body.MinimumAmount;
+    let Rating = req.body.Rating;
+    let Profitability = req.body.Profitability;
     let AdditionalInfo = req.body.AdditionalInfo;
 
-    let qr = `UPDATE clients SET cName = '${cName}', cType = '${cType}', cAddress = '${cAddress}', AdditionalInfo = '${AdditionalInfo}'
-                WHERE cID = '${cID}'`;
+    let qr = `UPDATE securities SET MinimumAmount = '${MinimumAmount}', Rating = '${Rating}', Profitability = '${Profitability}', AdditionalInfo = '${AdditionalInfo}'
+                WHERE SecuritiesID = '${SecuritiesID}'`;
+
+    db.query(qr, (err, result) => {
+        if(err){
+            console.log(err, 'POST ------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно оновлено',
+                results:result
+            });
+        }
+    });
+});
+
+app.put('/investments/:id', (req, res) =>{
+    
+    let iID = req.params.id;
+    let cID = req.body.cID;
+    let SecuritiesID = req.body.SecuritiesID;
+    let quotation = req.body.quotation;
+    let purchaseDate = req.body.purchaseDate;
+    let saleDate = req.body.saleDate;
+
+    let qr = `UPDATE investments SET cID = '${cID}', SecuritiesID = '${SecuritiesID}', quotation = '${quotation}', purchaseDate = '${purchaseDate}', saleDate='${saleDate}'
+                WHERE iID = '${iID}'`;
 
     db.query(qr, (err, result) => {
         if(err){
