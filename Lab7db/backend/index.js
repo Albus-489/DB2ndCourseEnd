@@ -38,6 +38,40 @@ app.get('/client', (req, res) => {
 
 });
 
+// ? Всі цінні папери
+app.get('/secur', (req, res) => {
+    
+    let qr = 'select * from `securities`';
+    db.query(qr, (err, result) => {
+        if(err){console.log(err, 'Get ------- error');}
+
+        if(result.length > 0){
+            res.send({
+                message: 'Вся інформація про цінні папери',
+                data: result
+            });
+        }
+    });
+
+});
+
+// ? Всі інвестиції
+app.get('/investments', (req, res) => {
+    
+    let qr = 'select * from `investments`';
+    db.query(qr, (err, result) => {
+        if(err){console.log(err, 'Get ------- error');}
+
+        if(result.length > 0){
+            res.send({
+                message: 'Вся інформація про інвестиції',
+                data: result
+            });
+        }
+    });
+
+});
+
 
 // ? Клієнт по id 
 app.get('/client/:id', (req, res) => {
