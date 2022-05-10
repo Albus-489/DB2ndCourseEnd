@@ -10,7 +10,23 @@ import { ApiserviceService } from "../apiservice.service"
 export class CreateInvestComponent implements OnInit {
 
   constructor(private service: ApiserviceService) { }
+
+
+  readDataClients:any;
+  readDataSecur:any;
+
   ngOnInit(): void {
+    this.service.getAllClientsInfo().subscribe((res) => {
+      console.log(res, "res==>");
+      this.readDataClients = res.data;
+    });
+
+    this.service.getAllSecurInfo().subscribe((res) => {
+      console.log(res, "res==>");
+      this.readDataSecur = res.data;
+
+      console.log(res.data[0]);
+    });
   }
 
   investForm = new FormGroup({
@@ -37,7 +53,6 @@ export class CreateInvestComponent implements OnInit {
       this.errormsg = 'Не всі поля заповнені!';
       console.log(this.investForm.value);
     }
-    
   }
 
 }

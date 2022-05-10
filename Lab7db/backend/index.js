@@ -150,10 +150,10 @@ app.post('/client', (req, res) => {
     let cName = req.body.cName;
     let cType = req.body.cType;
     let cAddress = req.body.cAddress;
-    let AdditionalInfo = req.body.AdditionalInfo;
+    let cPhone = req.body.cPhone;
 
-    let qr = `INSERT INTO clients(cName, cType, cAddress, AdditionalInfo) 
-                values('${cName}', '${cType}', '${cAddress}', '${AdditionalInfo}')`;
+    let qr = `INSERT INTO clients(cName, cType, cAddress, cPhone) 
+                values('${cName}', '${cType}', '${cAddress}', '${cPhone}')`;
 
     db.query(qr, (err, result) =>{
         if(err){console.log(err);}
