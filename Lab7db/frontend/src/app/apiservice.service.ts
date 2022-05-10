@@ -46,4 +46,21 @@ export class ApiserviceService {
     {
       return this._http.post(`${this.apiUrlInvest}`, data);
     }
+
+    // * Видалення клієнтів, цінних паперів, інвестицій *
+    deleteClient(id:any):Observable<any>
+    {
+      let ids = id;
+      return this._http.delete(`${this.apiUrl}/${ids}`);
+    }
+    deleteSecur(id:any):Observable<any>
+    {
+      let ids = id;
+      return this._http.delete(`${this.apiUrlSecur}/${ids}`);
+    }
+    deleteInvest(id:any):Observable<any>
+    {
+      let ids = id;
+      return this._http.delete(`${this.apiUrlInvest}/${ids}`);
+    }
 }

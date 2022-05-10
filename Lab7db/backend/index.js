@@ -276,12 +276,43 @@ app.put('/investments/:id', (req, res) =>{
 });
 
 // * Видалення даних (delete) *
-// ? Видалення клієнта по id
 app.delete('/client/:id', (req, res) =>{
 
     let cID = req.params.id;
 
     let qr = `DELETE FROM clients WHERE cID = ${cID}`;
+    db.query(qr, (err, result) => {
+        if(err){
+            console.log(err, '\n DELETE -------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно видалено!'
+            })
+        }
+    })
+});
+
+app.delete('/investments/:id', (req, res) =>{
+
+    let id = req.params.id;
+
+    let qr = `DELETE FROM investments WHERE iID = ${id}`;
+    db.query(qr, (err, result) => {
+        if(err){
+            console.log(err, '\n DELETE -------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно видалено!'
+            })
+        }
+    })
+});
+
+app.delete('/secur/:id', (req, res) =>{
+
+    let id = req.params.id;
+
+    let qr = `DELETE FROM securities WHERE SecuritiesID = ${id}`;
     db.query(qr, (err, result) => {
         if(err){
             console.log(err, '\n DELETE -------- error');

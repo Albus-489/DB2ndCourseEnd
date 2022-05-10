@@ -18,7 +18,7 @@
                 <td>{{us.cAddress}}</td>
                 <td>{{us.cPhone}}</td>
                 <td>
-                    <button class="btn-sm btn-danger">Видалити</button>
+                    <button class="btn-sm btn-danger" (click)="deleteClient(us.cID)">Видалити</button>
                 </td>
             </tr>
         </tbody>

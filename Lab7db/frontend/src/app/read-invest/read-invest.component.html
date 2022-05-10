@@ -20,7 +20,7 @@
                 <td>{{us.purchaseDate | date:'shortDate'}}</td>
                 <td>{{us.saleDate | date:'shortDate'}}</td>
                 <td>
-                    <button class="btn-sm btn-danger">Видалити</button>
+                    <button class="btn-sm btn-danger" (click)="deleteInvest(us.iID)">Видалити</button>
                 </td>
             </tr>
         </tbody>

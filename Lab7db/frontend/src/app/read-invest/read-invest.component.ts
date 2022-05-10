@@ -11,12 +11,24 @@ export class ReadInvestComponent implements OnInit {
   constructor(private service: ApiserviceService) { }
 
   readData:any;
-  
+
   ngOnInit(): void {
     this.service.getInvestInfo().subscribe((res) => {
       console.log(res, "res==>");
       this.readData = res.data;
     });
+  }
+
+  // * delete by id *
+  deleteInvest(id:any){
+    this.service.deleteInvest(id).subscribe((res)=>{
+      console.log(res,'deleteInvest===>');
+
+      this.service.getInvestInfo().subscribe((res) => {
+        console.log(res, "res==>");
+        this.readData = res.data;
+      });
+    })
   }
 
 }

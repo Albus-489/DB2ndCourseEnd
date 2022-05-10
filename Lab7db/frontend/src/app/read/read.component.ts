@@ -19,4 +19,16 @@ export class ReadComponent implements OnInit {
     });
   }
 
+  // * delete by id *
+  deleteClient(id:any){
+    this.service.deleteClient(id).subscribe((res)=>{
+      console.log(res,'deleteClient===>');
+
+      this.service.getAllClientsInfo().subscribe((res) => {
+        console.log(res, "res==>");
+        this.readData = res.data;
+      });
+    })
+  }
+
 }
