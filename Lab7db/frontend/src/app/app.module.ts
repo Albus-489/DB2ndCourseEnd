@@ -10,6 +10,8 @@ import { ReadComponent } from './read/read.component';
 import { ApiserviceService } from './apiservice.service';
 import { CreateSecurComponent } from './create-secur/create-secur.component';
 import { ReadSecurComponent } from './read-secur/read-secur.component';
+import { ReadInvestComponent } from './read-invest/read-invest.component';
+import { CreateInvestComponent } from './create-invest/create-invest.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ReadSecurComponent } from './read-secur/read-secur.component';
     CreateComponent,
     ReadComponent,
     CreateSecurComponent,
-    ReadSecurComponent
+    ReadSecurComponent,
+    ReadInvestComponent,
+    CreateInvestComponent
   ],
   imports: [
     BrowserModule,

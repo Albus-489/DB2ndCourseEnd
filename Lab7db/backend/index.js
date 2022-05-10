@@ -96,6 +96,52 @@ app.get('/client/:id', (req, res) => {
     });
 })
 
+// ? Цінний папір по id 
+app.get('/secur/:id', (req, res) => {
+
+    let cID = req.params.id;
+    let qr = `select * from securities where SecuritiesID= ${cID}`;
+
+    db.query(qr, (err, result) => {
+        if(err){console.log(err);}
+
+        if(result.length > 0){
+            res.send({
+                message: 'Інформація про цінний папір',
+                data: result
+            });
+        }
+        else{
+            res.send({
+                message: `Цінний папір з id ${req.params.id} не знайдено! Перевірте правильність введених даних.`
+            });
+        }
+    });
+})
+
+// ? Інвестиція по id 
+app.get('/investments/:id', (req, res) => {
+
+    let cID = req.params.id;
+    let qr = `select * from investments where iID= ${cID}`;
+
+    db.query(qr, (err, result) => {
+        if(err){console.log(err);}
+
+        if(result.length > 0){
+            res.send({
+                message: 'Інформація про інвестицію',
+                data: result
+            });
+        }
+        else{
+            res.send({
+                message: `Інвестицію з id ${req.params.id} не знайдено! Перевірте правильність введених даних.`
+            });
+        }
+    });
+})
+
 // * Додавання даних (post) *
 // ? Створення нового клієнта
 app.post('/client', (req, res) => {
@@ -104,15 +150,56 @@ app.post('/client', (req, res) => {
     let cName = req.body.cName;
     let cType = req.body.cType;
     let cAddress = req.body.cAddress;
-    let cPhone = req.body.cPhone;
+    let AdditionalInfo = req.body.AdditionalInfo;
 
-    let qr = `INSERT INTO clients(cName, cType, cAddress, cPhone) 
-                values('${cName}', '${cType}', '${cAddress}', '${cPhone}')`;
+    let qr = `INSERT INTO clients(cName, cType, cAddress, AdditionalInfo) 
+                values('${cName}', '${cType}', '${cAddress}', '${AdditionalInfo}')`;
 
     db.query(qr, (err, result) =>{
         if(err){console.log(err);}
         res.send({
               message:'Інформація додана'
+        });
+    })
+})
+
+// ? Створення нового цінного паперу
+app.post('/secur', (req, res) => {
+    console.log(req.body, 'createsecur');
+
+    let MinimumAmount = req.body.MinimumAmount;
+    let Rating = req.body.Rating;
+    let Profitability = req.body.Profitability;
+    let AdditionalInfo = req.body.AdditionalInfo;
+
+    let qr = `INSERT INTO securities(MinimumAmount, Rating, Profitability, AdditionalInfo) 
+                values('${MinimumAmount}', '${Rating}', '${Profitability}', '${AdditionalInfo}')`;
+
+    db.query(qr, (err, result) =>{
+        if(err){console.log(err);}
+        res.send({
+              message:'Інформацію про цінний папір додано'
+        });
+    })
+})
+
+// ? Створення нової інвестиції
+app.post('/investments', (req, res) => {
+    console.log(req.body, 'createinvest');
+
+    let cID = req.body.cID;
+    let SecuritiesID = req.body.SecuritiesID;
+    let quotation = req.body.quotation;
+    let purchaseDate = req.body.purchaseDate;
+    let saleDate = req.body.saleDate;
+
+    let qr = `INSERT INTO investments(cID, SecuritiesID, quotation, purchaseDate, saleDate) 
+                values('${cID}', '${SecuritiesID}', '${quotation}', '${purchaseDate}', '${saleDate}')`;
+
+    db.query(qr, (err, result) =>{
+        if(err){console.log(err);}
+        res.send({
+              message:'Інформацію про інвестицію додано'
         });
     })
 })
@@ -125,9 +212,9 @@ app.put('/client/:id', (req, res) =>{
     let cName = req.body.cName;
     let cType = req.body.cType;
     let cAddress = req.body.cAddress;
-    let cPhone = req.body.cPhone;
+    let AdditionalInfo = req.body.AdditionalInfo;
 
-    let qr = `UPDATE clients SET cName = '${cName}', cType = '${cType}', cAddress = '${cAddress}', cPhone = '${cPhone}'
+    let qr = `UPDATE clients SET cName = '${cName}', cType = '${cType}', cAddress = '${cAddress}', AdditionalInfo = '${AdditionalInfo}'
                 WHERE cID = '${cID}'`;
 
     db.query(qr, (err, result) => {
