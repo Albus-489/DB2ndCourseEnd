@@ -40,7 +40,7 @@ db.Cars.aggregate([{ $match: { brand: 'Volvo' } }, {
 // 10 (14)
 db.Supplies.aggregate([
   {
-    $lookup: {
+    $lookup: { //tables by id
       from: 'Suppliers',
       localField: 'supplier',
       foreignField: 'id',
@@ -48,10 +48,10 @@ db.Supplies.aggregate([
     }
   },
   {
-    $match: {
+    $match: { //if all result isActive = true
       result: {
         $elemMatch: {
-          isActive: true
+          isActive: true //where
         }
       }
     }
@@ -63,14 +63,14 @@ db.Supplies.aggregate([
 db.Supplies.aggregate([
   {
     $lookup: {
-      from: 'Suppliers',
-      localField: 'supplier',
-      foreignField: 'id',
+      from: 'Suppliers', 
+      localField: 'supplier', //connect to supplier id
+      foreignField: 'id', //connect to Suppliers by supplies id
       as: 'result1'
     }
   },
   {
-    $unwind: {
+    $unwind: {         //array to object
       path: "$result1"
     }
   },
@@ -100,8 +100,7 @@ db.Supplies.aggregate([
       "Phone": "$result1.phone",
       date: {
         $dateFromString: {
-          dateString: '$date',
-          timezone: 'America/New_York'
+          dateString: '$date'
         }
       }
     }
@@ -124,9 +123,11 @@ db.Cars.distinct("color")
 // 13 (17)
 db.Cars.distinct("color", { brand: "BMW" })
 //
+
 // 14 (18)
 db.Cars.aggregate({ $unwind: '$brand' }, { $group: { "_id": "$brand", "count": { $sum: 1 } } })
 //
+
 // 15 (19)
 db.Cars.drop()
 //
