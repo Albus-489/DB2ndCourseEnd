@@ -21,8 +21,13 @@ export class ApiserviceService {
     return this._http.delete(`${this.apiUrl}/${ids}`);
   }
 
-  createBook(data:any):Observable<any>
-    {
-      return this._http.post(`${this.apiUrl}`, data);
-    }
+  createBook(data: any): Observable<any> {
+    return this._http.post(`${this.apiUrl}`, data);
+  }
+
+  editBook(item:any): Observable<any> {
+    let ids = item._id;
+    return this._http.put(`${this.apiUrl}/${ids}`, item);
+  }
+
 }

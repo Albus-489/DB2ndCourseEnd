@@ -35,8 +35,10 @@ router.post("/", (req, res) =>{
 })
 // * Edit document *
 router.put("/:id", (req, res) =>{
-  if(!ObjId.isValid(req.params.id))
-    return res.status(400).send(`No record with given id : ${req.params.id}`)
+  if(!ObjId.isValid(req.body._id))
+    return res.status(400).send(`No record with given id : ${req.body._id}`)
+
+    var ID = req.body._id;
 
     var bks = {
       name: req.body.name,
@@ -45,7 +47,7 @@ router.put("/:id", (req, res) =>{
       genre: req.body.genre
     };
 
-    Books.findByIdAndUpdate(req.params.id, {$set: bks}, {new: true}, (err, doc) =>{
+    Books.findByIdAndUpdate(ID, {$set: bks}, {new: true}, (err, doc) =>{
       if(!err){res.send(doc);}
       else {console.log('Error in book Update!');}
     });
@@ -54,13 +56,6 @@ router.put("/:id", (req, res) =>{
 router.delete("/:id", (req, res) =>{
   if(!ObjId.isValid(req.params.id))
     return res.status(400).send(`No record with given id : ${req.params.id}`)
-
-    var bks = {
-      name: req.body.name,
-      author: req.body.author,
-      year: req.body.year,
-      genre: req.body.genre
-    };
 
     Books.findByIdAndRemove(req.params.id, (err, doc) =>{
       if(!err){res.send(doc);}
