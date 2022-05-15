@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,13 +7,22 @@ import { Observable } from 'rxjs';
 })
 export class ApiserviceService {
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   // ? * З'єднання фронта з беком *
   apiUrl = 'http://localhost:3000/Books';
 
-  getAllBooks():Observable<any>
+  getAllBooks(): Observable<any> {
+    return this._http.get(`${this.apiUrl}`);
+  }
+
+  deleteBook(id: any): Observable<any> {
+    let ids = id;
+    return this._http.delete(`${this.apiUrl}/${ids}`);
+  }
+
+  createBook(data:any):Observable<any>
     {
-        return this._http.get(`${this.apiUrl}`);
+      return this._http.post(`${this.apiUrl}`, data);
     }
 }

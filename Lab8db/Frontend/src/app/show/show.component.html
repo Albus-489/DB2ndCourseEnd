@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-8">
+      <div class="card bg-light mb-3" style="max-width: 100rem;">
+        <div class="card-body text-info">
+          <div class="row card-header createHeader">
+            <div class="col-11"> Список книг </div>
+            <div class="col-1 align-self-end"><button style="margin: 0 0;" class="btn btn-danger btn-sm"> <a style="text-decoration: none; color: white;" href="/">×</a></button></div>
+          </div>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Назва</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Рік</th>
+                <th scope="col">Жанр</th>
+                <th scope="col">Функції</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of readData">
+                <th scope="row"></th>
+                <td>{{item.name}}</td>
+                <td>{{item.author}}</td>
+                <td>{{item.year}}</td>
+                <td>{{item.genre}}</td>
+                <td>
+                  <button (click)="deleteBook(item._id)" class="btn btn-sm btn-danger">Видалити</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

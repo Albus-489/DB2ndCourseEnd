@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div *ngIf="errormsg" class="col-8 alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{errormsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div *ngIf="successmsg" class="col-8 alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{successmsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="card bg-light mb-3" style="max-width: 50rem;">
+      <div class="card-header createHeader">Створити запис про книгу</div>
+      <form [formGroup]="bookForm" (ngSubmit)="bookSubmit()">
+        <div class="card-body text-info">
+          <input formControlName="name" type="text" class="form-control" placeholder="Назва">
+          <input formControlName="author" type="text" class="form-control" placeholder="Автор">
+          <input formControlName="year" type="text" class="form-control" placeholder="Рік">
+          <input formControlName="genre" type="text" class="form-control" placeholder="Жанр">
+          <hr>
+        </div>
+        <div class="bt">
+          <button class="btn btn-primary">Створити</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
