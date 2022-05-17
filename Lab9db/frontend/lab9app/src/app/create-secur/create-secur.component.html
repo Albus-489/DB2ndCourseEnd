@@ -1,1 +1,35 @@
-<p>create-secur works!</p>
+<div class="col-6 offset-4 container">
+
+  <div *ngIf="errormsg" class="col-8 alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{errormsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="successmsg" class="col-8 alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{successmsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <form [formGroup]="securForm" (ngSubmit)="securSubmit()">
+      <div class="col-lg-8 mt-2">
+          <h3>Форма для створення цінного паперу</h3>
+          <input class="form-control" type="number" formControlName="minimumamount" id="" placeholder="Мінімальна сума угоди">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="number" formControlName="rating" id="" placeholder="Рейтинг">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="number" formControlName="profitability" id="" placeholder="Прибутковість">
+      </div>
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="text" formControlName="additionalinfo" id="" placeholder="Додаткова інфо">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <button class="btn btn-primary btn-sm">Створити</button>
+      </div>
+
+  </form>
+</div>

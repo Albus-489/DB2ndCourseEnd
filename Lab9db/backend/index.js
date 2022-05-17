@@ -66,7 +66,6 @@ app.post('/Securities', (req, res) => {
     let cType = req.body.rating;
     let cAddress = req.body.profitability;
     let cPhone = req.body.additionalinfo;
-
     let qr = `INSERT INTO securities(minimumamount, rating, profitability, additionalinfo) values('${cName}', '${cType}', '${cAddress}', '${cPhone}')`;
     //let qr = `select * from clients;`
     connection.query(qr, (err, result) =>{

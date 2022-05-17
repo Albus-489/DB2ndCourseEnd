@@ -66,4 +66,9 @@ export class ApiserviceService {
     //console.log(ids);
     return this._http.put(`${this.apiUrl}/${ids}`, item);
   }
+  editSecur(item:any): Observable<any> {
+    let ids = item.id;
+    //console.log(ids);
+    return this._http.put(`${this.apiUrlSecur}/${ids}`, item);
+  }
 }
