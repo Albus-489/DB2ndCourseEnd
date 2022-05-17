@@ -63,7 +63,6 @@ app.post('/postClient', (req, res) => {
         });
     })
 })
-
 app.post('/postSecur', (req, res) => {
     console.log(req.body, 'createdata');
 
@@ -81,7 +80,6 @@ app.post('/postSecur', (req, res) => {
         });
     })
 })
-
 app.post('/postInvest', (req, res) => {
     console.log(req.body, 'createdata');
 
@@ -91,7 +89,7 @@ app.post('/postInvest', (req, res) => {
     let dateofpurchase = req.body.dateofpurchase;
     let dateofsale = req.body.dateofsale;
 
-    let qr = `INSERT INTO clients(sid, cid, quotation, dateofpurchase, dateofsale) values('${cName}', '${cType}', '${cAddress}', '${dateofpurchase}', '${dateofsale}')`;
+    let qr = `INSERT INTO investments(sid, cid, quotation, dateofpurchase, dateofsale) values('${cName}', '${cType}', '${cAddress}', '${dateofpurchase}', '${dateofsale}')`;
     //let qr = `select * from clients;`
     connection.query(qr, (err, result) =>{
         if(err){console.log(err);}
@@ -101,8 +99,74 @@ app.post('/postInvest', (req, res) => {
     })
 })
 
+// ? PUT (edit) clients, ivest, secur
+app.put('/Clients/:id', (req, res) =>{
+    
+    let cID = req.params.id;
+    let cName = req.body.cname;
+    let cType = req.body.ctype;
+    let cAddress = req.body.caddress;
+    let cPhone = req.body.cphone;
+
+    let qr = `UPDATE clients SET cname = '${cName}', ctype = '${cType}', caddress = '${cAddress}', cphone = '${cPhone}'
+                WHERE id = '${cID}'`;
+
+    connection.query(qr, (err, result) => {
+        if(err){
+            console.log(err, 'POST ------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно оновлено',
+                results:result
+            });
+        }
+    });
+});
+app.put('/Investments/:id', (req, res) =>{
+    
+    let id = req.params.id;
+    let quotation = req.body.quotation;
+    let dateofpurchase = req.body.dateofpurchase;
+    let dateofsale = req.body.dateofsale;
+
+    let qr = `UPDATE investments SET quotation = '${quotation}', dateofpurchase = '${dateofpurchase}', dateofsale = '${dateofsale}' WHERE id = '${id}'`;
+
+    connection.query(qr, (err, result) => {
+        if(err){
+            console.log(err, 'POST ------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно оновлено',
+                results:result
+            });
+        }
+    });
+});
+app.put('/Securities/:id', (req, res) =>{
+    
+    let cID = req.params.id;
+    let cName = req.body.minimumamount;
+    let cType = req.body.rating;
+    let cAddress = req.body.profitability;
+    let cPhone = req.body.additionalinfo;
+
+    let qr = `UPDATE securities SET minimumamount = '${cName}', rating = '${cType}', profitability = '${cAddress}', additionalinfo = '${cPhone}'
+                WHERE id = '${cID}'`;
+
+    connection.query(qr, (err, result) => {
+        if(err){
+            console.log(err, 'POST ------- error');
+        }else{
+            res.send({
+                message: 'Дані успішно оновлено',
+                results:result
+            });
+        }
+    });
+});
+
 // ! DELETE by ids
-app.delete("/DeleteInvest/:Id", (req, res) => {
+app.delete("/Investments/:Id", (req, res) => {
   const id = req.params.Id;
   const sqlDelete = `delete from investments where id = ${id}`;
   connection.query(sqlDelete, (err, result) => {
@@ -115,7 +179,7 @@ app.delete("/DeleteInvest/:Id", (req, res) => {
     }
   });
 });
-app.delete("/DeleteClient/:Id", (req, res) => {
+app.delete("/Clients/:Id", (req, res) => {
   const id = req.params.Id;
   const sqlDelete = `delete from clients where id = ${id}`;
   connection.query(sqlDelete, (err, result) => {
@@ -128,7 +192,7 @@ app.delete("/DeleteClient/:Id", (req, res) => {
     }
   });
 });
-app.delete("/DelteSecur/:Id", (req, res) => {
+app.delete("/Securities/:Id", (req, res) => {
   const id = req.params.Id;
   const sqlDelete = `delete from securities where id = ${id}`;
   connection.query(sqlDelete, (err, result) => {
