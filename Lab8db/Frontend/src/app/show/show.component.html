@@ -55,9 +55,9 @@
         <div class="card-header createHeader">Редагування</div>
         <form [formGroup]="bookForm" (ngSubmit)="bookSubmit()">
           <div class="card-body text-info">
-            <input [(ngModel)]="curentItem.name" formControlName="name" type="text" class="form-control" placeholder="Назва">
+            <input  [(ngModel)]="curentItem.name" formControlName="name" type="text" class="form-control" placeholder="Назва">
             <input [(ngModel)]="curentItem.author" formControlName="author" type="text" class="form-control" placeholder="Автор">
-            <input [(ngModel)]="curentItem.year" formControlName="year" type="text" class="form-control" placeholder="Рік">
+            <input [(ngModel)]="curentItem.year" formControlName="year" type="number" class="form-control" placeholder="Рік">
             <input [(ngModel)]="curentItem.genre" formControlName="genre" type="text" class="form-control" placeholder="Жанр">
             <hr>
           </div>
