@@ -1,1 +1,51 @@
-<p>create-invest works!</p>
+<div class="col-6 offset-4 container">
+
+  <div *ngIf="errormsg" class="col-8 alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{errormsg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="successmsg" class="col-8 alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{successmsg}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <form [formGroup]="investForm" (ngSubmit)="investSubmit()">
+    <div class="col-lg-8 mt-2">
+      <h3>Форма для створення інвестиції</h3>
+      <select class="form-select" aria-label="Default select example" formControlName="cid">
+        <option [defaultSelected]="1">Клієнт</option>
+        <option *ngFor="let item of readDataClients">
+          {{item.id}}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-lg-8 mt-2">
+      <select class="form-select" aria-label="Default select example" formControlName="sid">
+        <option [defaultSelected]="1">Цінний папір</option>
+        <option *ngFor="let item of readDataSecur">
+          {{item.id}}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-lg-8 mt-2">
+      <input class="form-control" type="number" formControlName="quotation" id="" placeholder="Котирування">
+    </div>
+
+    <div class="col-lg-8 mt-2">
+      <label for="inputDate">Дата купівлі</label>
+      <input type="date" formControlName="dateofpurchase" class="form-control" placeholder="Дата купівлі">
+    </div>
+
+    <div class="col-lg-8 mt-2">
+      <label for="inputDate">Дата продажу</label>
+      <input type="date" formControlName="dateofsale" class="form-control" placeholder="Дата купівлі">
+    </div>
+
+    <div class="col-lg-8 mt-2">
+      <button class="btn btn-primary btn-sm">Створити</button>
+    </div>
+  </form>
+</div>

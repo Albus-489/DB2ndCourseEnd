@@ -1,1 +1,75 @@
-<p>show-invest works!</p>
+<div *ngIf="tableShow" class="col-8 offset-2 container clientTable">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>id клієнта</th>
+        <th>id цінного паперу</th>
+        <th>Котирування</th>
+        <th>Дата купівлі</th>
+        <th>Дата продажу</th>
+        <th>Функції</th>
+      </tr>
+    </thead>
+    <tbody *ngFor='let us of readData'>
+      <tr>
+        <td>{{us.id}}</td>
+        <td>{{us.cid}}</td>
+        <td>{{us.sid}}</td>
+        <td>{{us.quotation}}</td>
+        <td>{{us.dateofpurchase | date:'shortDate'}}</td>
+        <td>{{us.dateofsale | date:'shortDate'}}</td>
+        <td>
+          <button class="btn-sm btn-info" (click)="editPress(us)">Edit</button>
+          <button class="btn-sm btn-danger" (click)="deleteInvest(us.id)">-</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="editShow">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div *ngIf="errormsg" class="col-8 alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{errormsg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <div *ngIf="successmsg" class="col-8 alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{successmsg}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="card text-white mb-3 editBlock" style="max-width: 50rem;">
+        <div class="card-header createHeader">Редагування</div>
+        <form [formGroup]="investForm" (ngSubmit)="investSubmit()">
+          <div class="card-body text-info">
+            <select [(ngModel)]="curentItem.cid" class="form-select" aria-label="Default select example" formControlName="cid">
+              <option [defaultSelected]="">Клієнт</option>
+              <option *ngFor="let item of readDataClients">
+                {{item.id}}
+              </option>
+            </select>
+
+            <select class="mt-2 form-select" aria-label="Default select example" formControlName="sid">
+              <option [defaultSelected]="1">Цінний папір</option>
+              <option *ngFor="let item of readDataSecur">
+                {{item.id}}
+              </option>
+            </select>
+
+            <input [(ngModel)]="curentItem.quotation" class=" mt-2 form-control" type="number" formControlName="quotation" id="" placeholder="Котирування">
+
+            <label for="inputDate">Дата купівлі</label>
+            <input type="date" formControlName="dateofpurchase" class="form-control" placeholder="Дата купівлі">
+
+            <label for="inputDate">Дата продажу</label>
+            <input type="date" formControlName="dateofsale" class="form-control" placeholder="Дата купівлі">
+
+            <button class="btn btn-primary btn-sm">Створити</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
