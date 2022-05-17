@@ -1,0 +1,35 @@
+<div class="col-6 offset-4 container">
+
+  <div *ngIf="errormsg" class="col-8 alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{errormsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div *ngIf="successmsg" class="col-8 alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{successmsg}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <form [formGroup]="clientForm" (ngSubmit)="clientSubmit()">
+      <div class="col-lg-8 mt-2">
+          <h3>Форма для створення клієнта</h3>
+          <input class="form-control" type="text" formControlName="cname" id="" placeholder="Назва">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="text" formControlName="ctype" id="" placeholder="Вид власності">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="text" formControlName="caddress" id="" placeholder="Адреса">
+      </div>
+      <div class="col-lg-8 mt-2">
+          <input class="form-control" type="text" formControlName="cphone" id="" placeholder="Телефон">
+      </div>
+
+      <div class="col-lg-8 mt-2">
+          <button class="btn btn-primary btn-sm">Створити</button>
+      </div>
+
+  </form>
+</div>

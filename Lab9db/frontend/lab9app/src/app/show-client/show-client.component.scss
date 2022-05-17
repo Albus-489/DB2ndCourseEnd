@@ -1,0 +1,30 @@
+.table-striped{
+  border: 2px solid rgb(140, 153, 140);
+}
+pre{
+  text-align: left;
+}
+
+.createHeader{
+  color: rgb(58, 131, 210);
+}
+.editBlock{
+  background-color: rgba(33, 37, 41, 0.559);
+}
+
+input{
+  margin: 2% auto;
+  background-color: rgb(57, 56, 56);
+  color: aliceblue;
+  :focus{
+    color: black;
+  }
+}
+
+button{
+  margin-bottom: 2%;
+  margin-top: 0;
+}
+hr{
+  margin-bottom: 0;
+}

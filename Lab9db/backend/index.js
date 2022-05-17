@@ -24,7 +24,6 @@ app.get('/Clients',(req,res) => {
     const query = "select * from clients";
 
     connection.query(query,(err,result)=>{
-        console.log(err)
         res.send(result.rows)
     })
 })
@@ -32,7 +31,6 @@ app.get('/Securities',(req,res) => {
     const query = "select * from securities";
 
     connection.query(query,(err,result)=>{
-        console.log(err)
         res.send(result.rows)
     })
 })
@@ -40,15 +38,13 @@ app.get('/Investments',(req,res) => {
     const query = "select * from investments";
 
     connection.query(query,(err,result)=>{
-        console.log(err)
         res.send(result.rows)
     })
 })
 
 // * POST clients, invest, secur
-app.post('/postClient', (req, res) => {
-    console.log(req.body, 'createdata');
-
+app.post('/Clients', (req, res) => {
+  
     let cName = req.body.cname;
     let cType = req.body.ctype;
     let cAddress = req.body.caddress;
@@ -63,7 +59,7 @@ app.post('/postClient', (req, res) => {
         });
     })
 })
-app.post('/postSecur', (req, res) => {
+app.post('/Securities', (req, res) => {
     console.log(req.body, 'createdata');
 
     let cName = req.body.minimumamount;
@@ -80,7 +76,7 @@ app.post('/postSecur', (req, res) => {
         });
     })
 })
-app.post('/postInvest', (req, res) => {
+app.post('/Investments', (req, res) => {
     console.log(req.body, 'createdata');
 
     let cName = req.body.sid;
