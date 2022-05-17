@@ -33,11 +33,11 @@ export class ShowClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.service.getAllClientsInfo().subscribe(data => this.readData = data);
-
     this.service.getAllClientsInfo().subscribe((res) => {
-      console.log("res==> ", res);
+      console.log("res==> in onInit", res);
       this.readData = res;
+      let a:[{id: ''}] = this.readData;
+      a.sort((a, b) => a.id > b.id ? 1 : -1) //tf..
     });
   }
 
@@ -58,7 +58,7 @@ export class ShowClientComponent implements OnInit {
         this.successmsg = res.message;
         this.editShow = false;
         this.tableShow = true;
-        this.service.getAllClientsInfo().subscribe(data => this.readData = data);
+        this.ngOnInit();
       })
     }else{
       this.errormsg = 'Не всі поля заповнені!'
