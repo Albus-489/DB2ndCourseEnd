@@ -7,7 +7,7 @@ import { ShowComponent } from './show/show.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Lab8db';
 
   showTable(){
     location.href = '/show'
