@@ -1,14 +1,40 @@
 <mat-toolbar color="{{colors[curentclr]}}">
-  <button (click)="rel()" routerLink="" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+
+  <button (click)="rel()" routerLink="" mat-icon-button class="example-icon"
+    aria-label="Example icon-button with menu icon">
     <mat-icon>import_contacts</mat-icon>
   </button>
+
   <span>
     <h2>Лабораторна робота №10</h2>
   </span>
-  <button (click)="changeColor()" routerLink="" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+
+  <button (click)="changeColor()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>invert_colors</mat-icon>
   </button>
-  <span class="example-spacer"></span>
-</mat-toolbar>
 
+  <span class="example-spacer"></span>
+
+  <a style="text-decoration: none; color:aliceblue" routerLink="Clients">
+    <button mat-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <h2>Клієнти</h2>
+      <mat-icon>people_outline</mat-icon>
+    </button>
+  </a>
+
+  <a style="text-decoration: none; color:aliceblue" routerLink="Secur">
+    <button mat-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <h2>Цінні папери</h2>
+      <mat-icon>money</mat-icon>
+    </button>
+  </a>
+
+  <a style="text-decoration: none; color:aliceblue" routerLink="Invest">
+    <button mat-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <h2>Інвестиції</h2>
+      <mat-icon>trending_up</mat-icon>
+    </button>
+  </a>
+
+</mat-toolbar>
 <router-outlet></router-outlet>
