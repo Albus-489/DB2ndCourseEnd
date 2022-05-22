@@ -16,6 +16,7 @@ export class ClientsComponent implements OnInit {
   createForm = true;
   editForm = false;
 
+  // * Get all *
   ngOnInit(): void {
     this.service.getAllClientsInfo().subscribe((res) => {
       console.log("res==> in onInit", res);
@@ -25,6 +26,8 @@ export class ClientsComponent implements OnInit {
     });
   }
 
+
+  // * Create *
   clientForm = new FormGroup({
     'name': new FormControl('', Validators.required),
     'type': new FormControl('', Validators.required),

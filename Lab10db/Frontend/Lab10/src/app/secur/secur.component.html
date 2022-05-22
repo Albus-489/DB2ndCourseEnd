@@ -1,1 +1,83 @@
-<p>secur works!</p>
+<div class="container">
+  <div class="row">
+    <div *ngIf="createForm" class="col lSide">
+      <form [formGroup]="securForm" (ngSubmit)="securSubmit()">
+        <div>
+            <h3>Форма для створення цінного паперу</h3>
+            <input class="form-control" type="number" formControlName="minamount" id="" placeholder="Мінімальна сума угоди">
+        </div>
+
+        <div class="mt-2">
+            <input class="form-control" type="number" formControlName="profit" id="" placeholder="Прибутковість">
+        </div>
+
+        <div class="mt-2">
+            <input class="form-control" type="number" formControlName="rating" id="" placeholder="Рейтинг">
+        </div>
+        <div class="mt-2">
+            <input class="form-control" type="text" formControlName="info" id="" placeholder="Інфо">
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-primary btn-sm">Створити</button>
+        </div>
+
+    </form>
+    </div>
+
+    <div *ngIf="editForm" class="col lSide">
+      <form [formGroup]="securForm" (ngSubmit)="securSubmitUpdate()">
+        <div>
+            <h3 [style]="{'color': 'yellow'}">Форма для редагування клієнта *</h3>
+            <input [(ngModel)]="curentItem.minamount" class="form-control" type="number" formControlName="minamount" id="" placeholder="Мінімальна сума угоди">
+        </div>
+
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.profit" class="form-control" type="number" formControlName="profit" id="" placeholder="Прибутковість">
+        </div>
+
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.rating" class="form-control" type="number" formControlName="rating" id="" placeholder="Рейтинг">
+        </div>
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.info" class="form-control" type="text" formControlName="info" id="" placeholder="Інфо">
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-warning btn-sm">Підтвердити</button><br>
+            <button (click)="goBack()" type="button" class="btn btn-danger btn-sm mt-2">Повернутися</button>
+        </div>
+
+    </form>
+    </div>
+
+    <div class="col rSide">
+      <h3>Таблиця цінних паперів</h3>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Сума угоди (мін)</th>
+            <th scope="col">Профіт</th>
+            <th scope="col">Рейтинг</th>
+            <th scope="col">Інфо</th>
+            <th scope="col">Редагування</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of readData">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.minamount}}</td>
+            <td>{{item.profit}}</td>
+            <td>{{item.rating}}</td>
+            <td>{{item.info}}</td>
+            <td>
+              <button (click)="editPress(item)" class="btn btn-success btn-sm">Edit</button>
+              <button (click)="deleteSecur(item.id)" class="btn btn-danger btn-sm">Del</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
