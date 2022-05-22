@@ -146,6 +146,45 @@ app.put("/Investments/:id", (req, res) => {
   });
 });
 
+// ! DELETE data !
+
+app.delete("/Clients/:id", (req, res) => {
+  let ID = req.params.id
+
+  let qr = `DELETE FROM clients WHERE id = ?`;
+
+  db.run(qr, [ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про клієнта видалено",
+    });
+  });
+})
+app.delete("/Secur/:id", (req, res) => {
+  let ID = req.params.id
+
+  let qr = `DELETE FROM secur WHERE id = ?`;
+
+  db.run(qr, [ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про цінний папір видалено",
+    });
+  });
+})
+app.delete("/Investments/:id", (req, res) => {
+  let ID = req.params.id
+
+  let qr = `DELETE FROM investments WHERE id = ?`;
+
+  db.run(qr, [ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про інвестицію видалено",
+    });
+  });
+})
+
 app.listen(PORT, () => {
   console.log("App at ---> " + "http://localhost:3001/");
 });
