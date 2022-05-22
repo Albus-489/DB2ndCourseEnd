@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="createForm" class="col lSide">
+      <form [formGroup]="clientForm" (ngSubmit)="clientSubmit()">
+        <div>
+            <h3>Форма для створення клієнта</h3>
+            <input class="form-control" type="text" formControlName="name" id="" placeholder="Назва">
+        </div>
+
+        <div class="mt-2">
+            <input class="form-control" type="text" formControlName="type" id="" placeholder="Вид власності">
+        </div>
+
+        <div class="mt-2">
+            <input class="form-control" type="text" formControlName="address" id="" placeholder="Адреса">
+        </div>
+        <div class="mt-2">
+            <input class="form-control" type="text" formControlName="phone" id="" placeholder="Телефон">
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-primary btn-sm">Створити</button>
+        </div>
+
+    </form>
+    </div>
+
+    <div *ngIf="editForm" class="col lSide">
+      <form [formGroup]="clientForm" (ngSubmit)="clientSubmitUpdate()">
+        <div>
+            <h3 [style]="{'color': 'yellow'}">Форма для редагування клієнта *</h3>
+            <input [(ngModel)]="curentItem.name" class="form-control" type="text" formControlName="name" id="" placeholder="Назва">
+        </div>
+
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.type" class="form-control" type="text" formControlName="type" id="" placeholder="Вид власності">
+        </div>
+
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.address" class="form-control" type="text" formControlName="address" id="" placeholder="Адреса">
+        </div>
+        <div class="mt-2">
+            <input [(ngModel)]="curentItem.phone" class="form-control" type="text" formControlName="phone" id="" placeholder="Телефон">
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-warning btn-sm">Підтвердити</button><br>
+            <button (click)="goBack()" type="button" class="btn btn-danger btn-sm mt-2">Повернутися</button>
+        </div>
+
+    </form>
+    </div>
+
+    <div class="col rSide">
+      <h3>Таблиця клієнтів</h3>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Назва</th>
+            <th scope="col">Вид</th>
+            <th scope="col">Адреса</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Редагування</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of readData">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.phone}}</td>
+            <td>
+              <button (click)="editPress(item)" class="btn btn-success btn-sm">Edit</button>
+              <button (click)="deleteClient(item.id)" class="btn btn-danger btn-sm">Del</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

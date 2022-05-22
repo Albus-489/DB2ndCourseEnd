@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppserviceService } from './appservice.service';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Lab10';
 
+  constructor() { }
+
   selected='noneop';
   rel(){
     this.selected = 'noneop'
   }
 
-  colors = ['warn', 'primary' ,'accent']
+  // ? Color changer
+  colors = ['primary', 'warn' ,'accent']
   curentclr = 0
   changeColor(){
     if(this.curentclr < 2){
@@ -22,4 +27,6 @@ export class AppComponent {
       this.curentclr = 0;
     }
   }
+  //? ////////////////
+
 }
