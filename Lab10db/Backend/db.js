@@ -58,7 +58,6 @@ app.post("/Clients", (req, res) => {
   });
   });
 });
-
 app.post("/Secur", (req, res) => {
   let minamount = req.body.minamount;
   let profit = req.body.profit;
@@ -73,7 +72,6 @@ app.post("/Secur", (req, res) => {
     });
   });
 });
-
 app.post("/Investments", (req, res) => {
   let cid = req.body.cid;
   let sid = req.body.sid;
@@ -92,9 +90,61 @@ app.post("/Investments", (req, res) => {
 
 // ^ UPDATE data ^
 
-app.put("/Clients", (req, res) => {})
-app.put("/Secur", (req, res) => {})
-app.put("/Investments", (req, res) => {})
+app.put("/Clients/:id", (req, res) => {
+  
+  let ID = req.params.id
+  let name = req.body.name;
+  let type = req.body.type;
+  let address = req.body.address;
+  let phone = req.body.phone;
+
+  let qr = `UPDATE clients SET name = ?, type = ?, address = ?, phone = ?
+   WHERE id = ?`;
+
+  db.run(qr, [name, type, address, phone, ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про клієнта оновлено успішно",
+    });
+  });
+});
+app.put("/Secur/:id", (req, res) => {
+  let ID = req.params.id;
+
+  let minamount = req.body.minamount;
+  let profit = req.body.profit;
+  let rating = req.body.rating;
+  let info = req.body.info;
+
+  let qr = `UPDATE secur SET minamount = ?, profit = ?, rating = ?, info = ?
+   WHERE id = ?`;
+
+  db.run(qr, [minamount, profit, rating, info, ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про цінний папір оновлено успішно",
+    });
+  });
+});
+app.put("/Investments/:id", (req, res) => {
+  let ID = req.params.id;
+
+  let cid = req.body.cid;
+  let sid = req.body.sid;
+  let quo = req.body.quo;
+  let purdate = req.body.purdate;
+  let saledate = req.body.saledate;
+  
+  let qr = `UPDATE investments SET cid = ?, sid = ?, quo = ?, purdate = ?, saledate = ?
+   WHERE id = ?`;
+
+  db.run(qr, [cid, sid, quo, purdate, saledate, ID], (err) => {
+    if (err) return console.error(err.message);
+    res.send({
+      message: "Інформацію про інвестиції оновлено успішно",
+    });
+  });
+});
 
 app.listen(PORT, () => {
   console.log("App at ---> " + "http://localhost:3001/");
