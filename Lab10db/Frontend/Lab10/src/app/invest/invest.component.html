@@ -1,1 +1,112 @@
-<p>invest works!</p>
+<div class="container">
+  <div class="row">
+
+    <div *ngIf="createForm" class="col-5 lSide">
+      <form [formGroup]="investForm" (ngSubmit)="investSubmit()">
+        <div class="col">
+          <h3>Форма для створення інвестиції</h3>
+          <select class="form-select" aria-label="Default select example" formControlName="cid">
+            <option [defaultSelected]="1">Клієнт</option>
+            <option *ngFor="let item of clientData">
+              {{item.id}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col mt-2">
+          <select class="form-select" aria-label="Default select example" formControlName="sid">
+            <option [defaultSelected]="1">Цінний папір</option>
+            <option *ngFor="let item of secData">
+              {{item.id}}
+            </option>
+          </select>
+        </div>
+
+        <div class="mt-2">
+          <input class="form-control" type="number" formControlName="quo" id="" placeholder="Котирування">
+        </div>
+        <div class="mt-2">
+          <input class="form-control" type="text" formControlName="purdate" id="" placeholder="Дата купівлі">
+        </div>
+        <div class="mt-2">
+          <input class="form-control" type="text" formControlName="saledate" id="" placeholder="Дата продажу">
+        </div>
+
+        <div class="mt-2">
+          <button class="btn btn-primary btn-sm">Створити</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div *ngIf="editForm" class="col-5 lSide">
+      <form [formGroup]="investForm" (ngSubmit)="investSubmit()">
+        <div>
+            <h3 [style]="{'color': 'yellow'}">Форма для редагування інвестиції</h3>
+            <select class="form-select" aria-label="Default select example" formControlName="cid">
+              <option [defaultSelected]="1">Клієнт</option>
+              <option *ngFor="let item of clientData">
+                {{item.id}}
+              </option>
+            </select>
+        </div>
+
+        <div class="col mt-2">
+          <select class="form-select" aria-label="Default select example" formControlName="sid">
+            <option [defaultSelected]="1">Цінний папір</option>
+            <option *ngFor="let item of secData">
+              {{item.id}}
+            </option>
+          </select>
+        </div>
+
+        <div class="mt-2">
+          <input [(ngModel)]="curentItem.quo" class="form-control" type="number" formControlName="quo" id="" placeholder="Котирування">
+        </div>
+        <div class="mt-2">
+          <input [(ngModel)]="curentItem.purdate" class="form-control" type="text" formControlName="purdate" id="" placeholder="Дата купівлі">
+        </div>
+        <div class="mt-2">
+          <input [(ngModel)]="curentItem.saledate" class="form-control" type="text" formControlName="saledate" id="" placeholder="Дата продажу">
+        </div>
+
+        <div class="mt-2">
+          <button class="btn btn-warning btn-sm">Підтвердити</button><br>
+          <button (click)="goBack()" type="button" class="btn btn-danger btn-sm mt-2">Повернутися</button>
+      </div>
+
+    </form>
+    </div>
+
+    <div class="col rSide">
+      <h3>Таблиця інвестицій</h3>
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Клієнт</th>
+            <th scope="col">Цінний папір</th>
+            <th scope="col">Котирування</th>
+            <th scope="col">Дата купівлі</th>
+            <th scope="col">Дата продажу</th>
+            <th scope="col">Редагування</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of readData">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.cid}}</td>
+            <td>{{item.sid}}</td>
+            <td>{{item.quo}}</td>
+            <td>{{item.purdate}}</td>
+            <td>{{item.saledate}}</td>
+            <td>
+              <button (click)="editPress(item)" class="btn btn-success btn-sm">Edit</button>
+              <button (click)="deleteInvest(item.id)" class="btn btn-danger btn-sm">Del</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

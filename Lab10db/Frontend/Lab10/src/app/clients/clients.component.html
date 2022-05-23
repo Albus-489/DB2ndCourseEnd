@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div *ngIf="createForm" class="col lSide">
+    <div *ngIf="createForm" class="col-5 lSide">
       <form [formGroup]="clientForm" (ngSubmit)="clientSubmit()">
         <div>
             <h3>Форма для створення клієнта</h3>
@@ -25,7 +25,7 @@
     </form>
     </div>
 
-    <div *ngIf="editForm" class="col lSide">
+    <div *ngIf="editForm" class="col-5 lSide">
       <form [formGroup]="clientForm" (ngSubmit)="clientSubmitUpdate()">
         <div>
             <h3 [style]="{'color': 'yellow'}">Форма для редагування клієнта *</h3>
